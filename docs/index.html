@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>每日聖經靈修</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar">
+        <div>
+          <h1>每日聖經靈修</h1>
+          <p>完全離線，本機閱讀與收藏</p>
+        </div>
+      </header>
+      <nav class="tabs" aria-label="主要功能">
+        <button class="tab active" data-tab="today">今日</button>
+        <button class="tab" data-tab="bible">讀經</button>
+        <button class="tab" data-tab="favorites">收藏</button>
+        <button class="tab" data-tab="settings">設定</button>
+        <button class="tab" data-tab="about">來源</button>
+      </nav>
+      <main id="content" tabindex="-1"></main>
+    </div>
+    <script src="./data/bible-data.js"></script>
+    <script src="./data/devotions-data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

@@ -122,7 +122,12 @@ function renderBible() {
   if (!state.book) state.book = bookList[0] || '';
   const chapterList = chapters(state.book);
   if (!chapterList.includes(state.chapter)) state.chapter = chapterList[0] || 1;
-  const current = verses.filter((item) => item.book === state.book && item.chapter === state.chapter);
+  const current = verses
+    .filter((item) => item.book === state.book && item.chapter === state.chapter)
+    .filter((item, index, rows) => {
+      const previous = rows[index - 1];
+      return !(previous && previous.verse_label === item.verse_label && previous.text === item.text);
+    });
   content.innerHTML = `
     <section class="section">
       <h2 class="title">讀經</h2>
@@ -130,7 +135,7 @@ function renderBible() {
         <select id="bookSelect">${bookList.map((book) => `<option value="${escapeHtml(book)}" ${book === state.book ? 'selected' : ''}>${escapeHtml(book)}</option>`).join('')}</select>
         <select id="chapterSelect">${chapterList.map((chapter) => `<option value="${chapter}" ${chapter === state.chapter ? 'selected' : ''}>第 ${chapter} 章</option>`).join('')}</select>
       </div>
-      <div class="verse-list">${current.map((item) => `<p class="body"><span class="verse-num">${item.verse}</span>${escapeHtml(item.text)}</p>`).join('')}</div>
+      <div class="verse-list">${current.map((item) => `<p class="body"><span class="verse-num">${escapeHtml(item.verse_label || item.verse)}</span>${escapeHtml(item.text)}</p>`).join('')}</div>
     </section>
   `;
   document.getElementById('bookSelect').addEventListener('change', (event) => {

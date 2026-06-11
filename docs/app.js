@@ -39,6 +39,12 @@ function saveSettings(next) {
   applySettings();
 }
 
+function saveAndroidReminder(time) {
+  if (window.AndroidBridge && typeof window.AndroidBridge.saveReminder === 'function') {
+    window.AndroidBridge.saveReminder(time);
+  }
+}
+
 function favorites() {
   const ids = readJson(keys.favorites, []);
   return Array.isArray(ids) ? ids.filter(Number.isInteger) : [];
@@ -232,6 +238,7 @@ document.addEventListener('click', async (event) => {
   if (action === 'save-reminder') {
     const time = document.getElementById('reminderTime').value || '08:00';
     saveSettings({ ...current, reminder_time: time });
+    saveAndroidReminder(time);
     if ('Notification' in window && Notification.permission === 'default') {
       await Notification.requestPermission();
     }

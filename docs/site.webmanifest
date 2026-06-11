@@ -1,0 +1,21 @@
+﻿{
+    "display":  "standalone",
+    "lang":  "zh-Hant",
+    "icons":  [
+                  {
+                      "type":  "image/png",
+                      "sizes":  "192x192",
+                      "src":  "./icons/icon-192.png"
+                  },
+                  {
+                      "type":  "image/png",
+                      "sizes":  "512x512",
+                      "src":  "./icons/icon-512.png"
+                  }
+              ],
+    "background_color":  "#f8fafc",
+    "theme_color":  "#0f766e",
+    "name":  "每日聖經靈修",
+    "start_url":  "./index.html",
+    "short_name":  "聖經靈修"
+}
